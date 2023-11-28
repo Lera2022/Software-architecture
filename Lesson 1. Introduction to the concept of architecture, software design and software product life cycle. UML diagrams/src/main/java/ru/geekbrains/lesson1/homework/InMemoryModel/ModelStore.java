@@ -1,39 +1,31 @@
-package ru.geekbrains.lesson1.homework.InMemoryModel;
-
-import ru.geekbrains.lesson1.homework.ModelElements.PoligonalModel;
-
 import java.util.ArrayList;
-import java.util.Collection;
 
-/**
- * Хранилище 3D-элементов
- * TODO: Доработать самостоятельно в рамках домашней работы
- */
-public class ModelStore implements ModelChanger {
+public class ModelStore implements IModelChangeObserver, IModelChanger {
 
-    private Collection<ModelChangedObserver> observers = new ArrayList<>();
+    // List of models
+    ArrayList<PoligonalModel> models = new ArrayList<>();
 
-    @Override
-    public void registerModelChanger(ModelChangedObserver o) {
-        observers.add(o);
+    // List of scenes
+    ArrayList<Scene> scenes = new ArrayList<>();
+
+    // List of flashes
+    ArrayList<Flash> flashes = new ArrayList<>();
+
+    // List of cameras
+    ArrayList<Camera> cameras = new ArrayList<>();
+
+    // Get scene by index
+    public Scene getScene(int sceneIndex) {
+        return scenes.get(sceneIndex);
     }
 
     @Override
-    public void removeModelChanger(ModelChangedObserver o) {
-        observers.remove(o);
+    public void notifyChange() {
+        // TODO: Implement
     }
 
-    /**
-     * Нотификация изменений на уровне хранилища
-     */
-    private void notifyChange(){
-        for (ModelChangedObserver observer : observers){
-            observer.applyUpdateModel();
-        }
+    @Override
+    public void applyUpdateModel() {
+        // TODO: Implement
     }
-
-    public void addModel(PoligonalModel poligonalModel){
-        notifyChange();
-    }
-
 }
